@@ -9,3 +9,4 @@ scikit_learn
 tldextract
 torch
 transformers
+playwright
