@@ -10,7 +10,7 @@ from sklearn.preprocessing import StandardScaler
 import torch.nn as nn
 from flask_cors import CORS
 import traceback
-from analyze import analyze_url
+from analyze import analyze_url_playwright
 
 app = Flask(__name__)
 CORS(app)
@@ -115,7 +115,7 @@ def predict_api():
         if not url:
             return jsonify({'error': 'Missing URL'}), 400
 
-        features_dict = analyze_url(url)
+        features_dict = analyze_url_playwright(url)
         df = pd.DataFrame([features_dict])
         preds = predict(df, "binary_classifier_cnn.pth", "Babatunde1/BErt_finetuned")
         return jsonify({'url': url, 'prediction': preds})
